@@ -1,0 +1,32 @@
+<form [formGroup]="nuevaPregunta">
+  <div class="form-group input-group-lg">
+    <input type="text" class="form-control" placeholder="Ingrese Pregunta" formControlName="titulo">
+  </div>
+  <span class="text-danger" *ngIf="nuevaPregunta.get('titulo')?.hasError('required') && nuevaPregunta.get('titulo')?.touched">
+    La pregunta <strong>es requerida</strong>
+  </span>
+  <div formArrayName="respuestas" *ngFor="let item of getRespuestas.controls; let i=index">
+    <div class="input-group mt-3" [formGroupName]="i">
+      <input type="text" class="form-control" placeholder="Respuesta {{i+1}}" formControlName="descripcion">
+      <div class="input-group-text">
+        <input class="form-check-input mt-0" type="radio" (change)="setRespuestaValida(i)" [value]="i"  name="esCorrecta" formControlName="esCorrecta">
+      </div>
+      <span class="material-icons delete-icon" (click)="eliminarRespuesta(i)">
+        delete
+      </span>
+    </div>
+    <span class="text-danger" *ngIf="item.get('descripcion')?.hasError('required') && item.get('descripcion')?.touched">
+      La respuesta <strong>es requerida</strong>
+    </span>
+  </div>
+  <span class="material-icons add-icon" (click)="agregarRespuesta()" >
+    add
+  </span>
+  <br>
+  <br>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-primary mt-3" [disabled]="nuevaPregunta.invalid" (click)="agregarPregunta()">Agregar</button>
+  </div>
+
+
+</form>

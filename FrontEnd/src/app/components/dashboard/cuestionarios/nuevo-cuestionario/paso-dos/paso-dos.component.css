@@ -1,0 +1,15 @@
+.btnFinalizar{
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-right: 1px;
+}
+
+.material-icons{
+  float:right;
+}
+
+.list-group-item{
+  padding: .20rem;
+  padding-left: 20px;
+}

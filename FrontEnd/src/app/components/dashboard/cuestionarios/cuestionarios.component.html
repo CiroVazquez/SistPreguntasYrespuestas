@@ -1,0 +1,33 @@
+<div class="jumbotron text-center">
+  <h1>Bienvenido {{nombreUsuario}}!</h1>
+  <p class="lead text-muted">CUESTIONARIOS</p>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <button class="btn btn-success btn-block btn-cues router" routerLink="/dashboard/nuevoCuestionario/pasoUno">NUEVO CUESTIONARIO</button>
+    </div>
+  </div>
+</div>
+<br>
+<div class="text-center">
+  <app-loading *ngIf="loading"></app-loading>
+</div>
+<div class="container">
+  <div class="row" >
+    <div class="col-3" *ngFor="let cuestionario of listCuestionarios" style="margin: 10px; width: 23rem;">
+      <div class="card bg-light" >
+        <div class="card-body text-center">
+          <h4 class="card-title">{{cuestionario.nombre}}</h4>
+          <p class="card-text">{{cuestionario.descripcion}}</p>
+          <div class="row">
+            <button class="btn btn-success radius" routerLink="/dashboard/verCuestionario/{{cuestionario.id}} ">Ver</button>
+            <button class="btn btn-info radius" routerLink="/dashboard/estadisticas/{{cuestionario.id}}">Est</button>
+            <button class="btn btn-danger radius" (click)="eliminarCuestionario(cuestionario.id ?? 0)">Eliminar</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 *ngIf="listCuestionarios.length == 0 && loading == false">No hay Cuestionarios para mostrar</h3>

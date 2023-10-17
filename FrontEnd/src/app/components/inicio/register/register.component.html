@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center" style="padding: 20px;">
+                <h3>Registrarse</h3>
+                <br>
+                <app-loading *ngIf="loading"></app-loading>
+                <form [formGroup]="register" (ngSubmit)="registrarUsuario()" style="padding: 10px;">
+                    <div class="form-group m-3" style="text-align: start;">
+                        <input type="text" class="form-control" placeholder="Usuario" formControlName="usuario">
+                        <span class="text-danger" *ngIf="register.get('usuario')?.hasError('required') && register.get('usuario')?.touched">
+                            El usuario <strong>es requerido</strong>
+                        </span>
+
+                    </div>
+                    <div class="form-group m-3"style="text-align: start;">
+                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
+                        <span class="text-danger" *ngIf="register.get('password')?.hasError('required') && register.get('password')?.touched">
+                            El password <strong>es requerido</strong>
+                        </span>
+                        <span class="text-danger m-lg-2" *ngIf="register.get('password')?.hasError('minlength')">
+                            La contraseña debe tener ><strong>como minimo 4 caracteres</strong>
+                        </span>
+                    </div>
+                    <div class="form-group m-3"style="text-align: start;">
+                        <input type="password" class="form-control" placeholder="Repetir Contraseña" formControlName="confirmPassword">
+                        <span class="text-danger m-lg-2" style="text-align: start;" *ngIf="register.hasError('notSame')">
+                            Contraseñas <strong>distintas</strong>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary m-2 btn-reg" type="submit" >Aceptar</button>
+                        <button class="btn btn-secondary m-2" routerLink="/inicio/login">Vovler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

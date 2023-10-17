@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h3 class="text-center">
+      Cambiar Contraseña
+    </h3>
+
+    <app-loading *ngIf="loading" style=""></app-loading>
+
+    <form [formGroup]="cambiarPassword" (ngSubmit)="guardarPassword()">
+      <div class="form-group">
+        <input type="password" class="form-control m-2" placeholder="Contraseña Anterior" formControlName="passwordAnterior">
+        <span class="text-danger m-3" *ngIf="cambiarPassword.get('passwordAnterior')?.hasError('required') && cambiarPassword.get('passwordAnterior')?.touched">
+          La contraseña <strong>es requerida</strong>
+        </span>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control m-2" placeholder="Nueva Contraseña" formControlName="nuevaPassword">
+      </div>
+      <span class="text-danger m-3" *ngIf="cambiarPassword.get('nuevaPassword')?.hasError('required') && cambiarPassword.get('nuevaPassword')?.touched">
+        La nueva contraseña <strong>es requerida</strong>
+      </span>
+      <span class="text-danger m-3" *ngIf="cambiarPassword.get('nuevaPassword')?.hasError('minlength') ">
+        Se requiere al menos <strong>4 caracteres</strong>
+      </span>
+      <div class="form-group">
+        <input type="password" class="form-control m-2" placeholder="Repetir Contraseña" formControlName="confirmPassword">
+      </div>
+      <span class="text-danger m-3" *ngIf="cambiarPassword.hasError('notSame')">
+        Contraseñas <strong>distintas</strong>
+      </span>
+      <div class="col text-center">
+        <button class="btn btn-primary m-2 btn-acep" [disabled]="cambiarPassword.invalid">Aceptar</button>
+        <button class="btn btn-secondary" routerLink="../">Volver</button>
+      </div>
+    </form>
+  </div>
+</div>
